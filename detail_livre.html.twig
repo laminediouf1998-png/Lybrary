@@ -1,0 +1,85 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Détails du livre – {{ livre.titre }}
+{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <!-- Header + actions -->
+  <div class="page-header">
+    <h2>{{ livre.titre }}</h2>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary"
+         href="{{ path('modifier_livre', { id: livre.id }) }}">
+        Modifier
+      </a>
+
+      <a class="btn btn-danger"
+         href="{{ path('supprimer_livre', { id: livre.id }) }}"
+         onclick="return confirm('Voulez-vous vraiment supprimer ce livre ?');">
+        Supprimer
+      </a>
+    </div>
+  </div>
+
+  <!-- Infos du livre -->
+  <div class="author-details">
+    <div class="detail-row">
+      <span class="detail-label">ISBN</span>
+      <span class="detail-value">{{ livre.isbn }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Titre</span>
+      <span class="detail-value">{{ livre.titre }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Nombre de pages</span>
+      <span class="detail-value">{{ livre.nbPages }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Date de parution</span>
+      <span class="detail-value">
+        {{ livre.dateDeParition|date('d/m/Y') }}
+      </span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Note</span>
+      <span class="detail-value">{{ livre.note }}</span>
+    </div>
+  </div>
+
+  <!-- Genres -->
+  <h3 class="section-title">Genres</h3>
+  {% if genres is empty %}
+    <p class="search-empty">Aucun genre pour ce livre.</p>
+  {% else %}
+    <div class="author-books">
+      {% for genre in genres %}
+        <span class="genre-badge">{{ genre.nom }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Auteurs -->
+  <h3 class="section-title">Auteurs</h3>
+  {% if auteurs is empty %}
+    <p class="search-empty">Aucun auteur pour ce livre.</p>
+  {% else %}
+    <div class="author-books">
+      {% for auteur in auteurs %}
+        <span class="genre-badge">{{ auteur.nomPrenom }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

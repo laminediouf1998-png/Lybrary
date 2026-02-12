@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="layout">
+
+    {% include 'partials/_sidebar.html.twig' %}
+
+    <main class="main">
+      <button class="sidebar-toggle" type="button" aria-label="Afficher le menu" data-sidebar-toggle>
+        <span class="sidebar-toggle__bar"></span>
+        <span class="sidebar-toggle__bar"></span>
+        <span class="sidebar-toggle__bar"></span>
+      </button>
+
+      {% if app.request.attributes.get('_route') != 'menu' %}
+        <button class="back-btn" type="button" onclick="window.location.href='{{ path('menu') }}'">
+          Retour
+        </button>
+      {% endif %}
+
+      {% block contenu %}{% endblock %}
+    </main>
+
+  </div>
+{% endblock %}

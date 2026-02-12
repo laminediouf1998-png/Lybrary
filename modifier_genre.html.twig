@@ -1,0 +1,41 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Modifier le genre
+{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h2>Modifier le genre</h2>
+  </div>
+
+  <div class="form-card">
+    {{ form_start(monFormulaire) }}
+
+      <div class="form-group">
+        {{ form_label(monFormulaire.nom) }}
+        {{ form_widget(monFormulaire.nom, { attr: { class: 'form-input' } }) }}
+        {{ form_errors(monFormulaire.nom) }}
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary">
+        Enregistrer
+        </button>
+
+        <a href="{{ path('lister_genres') }}"
+        class="btn btn-secondary">
+        Annuler
+</a>
+
+      </div>
+
+    {{ form_end(monFormulaire) }}
+  </div>
+
+</div>
+
+{% endblock %}

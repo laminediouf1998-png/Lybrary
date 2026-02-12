@@ -1,0 +1,45 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Auteurs et genres
+{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h1>Auteurs et genres</h1>
+  </div>
+
+  {% set auteurCourant = null %}
+  <div class="group-list">
+
+  {% for row in resultats %}
+
+      {% if auteurCourant != row[0].id %}
+          {% if auteurCourant is not null %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="group-card">
+            <h3 class="group-title">{{ row[0].nomPrenom }}</h3>
+            <ul class="pill-list">
+
+          {% set auteurCourant = row[0].id %}
+      {% endif %}
+
+      <li class="pill">{{ row[1].nom }}</li>
+
+  {% endfor %}
+
+  {% if auteurCourant is not null %}
+      </ul>
+    </div>
+  {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}

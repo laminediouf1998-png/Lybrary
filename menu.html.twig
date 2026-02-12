@@ -1,1 +1,152 @@
+{# {% extends 'layout.html.twig' %}
+
+
+{% block titre %}
+
+<p style='text-align:center'> Votre menu</p>
+{% endblock %}
+
+
+{% block contenu %}
+<div style="text-align:center">
+<h2 style="text-align:center">Les actions disponibles pour le moment </h2> 
+<ul><a href="{{path('ajouter_livre')}}">Ajouter un livre</a></ul>
+<ul><a href="{{path('ajouter_genre')}}">Ajouter un genre</a></ul>
+<ul><a href="{{path('ajouter_auteur')}}">Ajouter un auteur</a></ul>
+    {# ces liens a reintegrer une fois=>plus modulaire  #}
+{# <a href="{{path('modifier_auteur',{id:auteur.id})}}">Modifier un auteur</a> #}
+{# <a href="{{path('afficher_detail_auteur',{id:Auteur.id})}}">Afficher les détails d'un auteur</a> #}
+{# <a href="{{path('supprimer_auteur',{id:auteur.id})}}">Supprimer un auteur</a> #}
+{# <ul><a href="{{path('ajouter_livre')}}">Lister les livres(décroissante)</a> #}
+{# <a href="{{path('details_livre',{id:livre.id})}}">Afficher les détails d'un livre</a> #}
+{# </ul>
+</div>
+{% endblock %}
+
+ #} 
+  {% extends 'admin_base.html.twig' %}
+
+{% block titre %}Tableau de bord{% endblock %}
+
+{% block contenu %}
+  <h1>Tableau de bord</h1>
+  <div class="cards">
+
+  <div class="card card--blue">
+    <div class="card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book size-6"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg></div>
+    <div class="card__info">
+      <div class="card__title">Total Livres</div>
+      <div class="card__value">{{total_livres}}</div>
+    </div>
+  </div>
+
+  <div class="card card--green">
+    <div class="card__icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+</svg>
+</div>
+    <div class="card__info">
+      <div class="card__title">Total Auteurs</div>
+      <div class="card__value">{{total_auteurs}}</div>
+    </div>
+  </div>
+
+  <div class="card card--orange">
+    <div class="card__icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+</svg>
+</div>
+    <div class="card__info">
+      <div class="card__title">Emprunts en cours</div>
+      <div class="card__value">45</div>
+    </div>
+  </div>
+<div class="card card--purple card--menu card--clickable" id="actionsMenu">
+  <div class="card__icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</div>
+
+  <div class="card__info">
+    <div class="card__title">Actions</div>
+    <div class="card__value">Ouvrir</div>
+  </div>
+
+  <div class="dropdown-menu">
+    <a href="{{ path('lister_livres') }}"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M9 3h2v18H9zm11.71 17.23-3.8-8.15-3.81-8.16-.9.42-.91.43 3.8 8.15 3.81 8.16.9-.42zM6 3h2v18H6zM3 3h2v18H3z" ></path>
+</svg> Lister les livres</a>
+    <a href="{{ path('ajouter_livre') }}"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"></path>
+</svg> Ajouter un livre</a>
+
+    <a href="{{ path('lister_auteurs') }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon size-4 lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg> Lister les auteurs</a>
+    <a href="{{ path('ajouter_auteur') }}"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M22 11h-3V8h-2v3h-3v2h3v3h2v-3h3zM4 8c0 2.28 1.72 4 4 4s4-1.72 4-4-1.72-4-4-4-4 1.72-4 4m6 0c0 1.18-.82 2-2 2s-2-.82-2-2 .82-2 2-2 2 .82 2 2M3 20h10c.55 0 1-.45 1-1v-1c0-2.76-2.24-5-5-5H7c-2.76 0-5 2.24-5 5v1c0 .55.45 1 1 1m4-5h2c1.65 0 3 1.35 3 3H4c0-1.65 1.35-3 3-3"></path>
+</svg> Ajouter un auteur</a>
+
+    <a href="{{ path('lister_genres') }}"><svg class="size-4"  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M21.53 5.15a.99.99 0 0 0-.97-.04l-10 5a1 1 0 0 0-.55.89v10a1 1 0 0 0 1 1c.15 0 .31-.04.45-.11l10-5a1 1 0 0 0 .55-.89V6c0-.35-.18-.67-.47-.85ZM20 15.38l-8 4v-7.76l8-4z"></path><path d="m16.55 3.11-10 5A1 1 0 0 0 6 9v10h2V9.62l9.45-4.72-.89-1.79Z"></path><path d="m12.55 1.11-10 5A1 1 0 0 0 2 7v10h2V7.62l9.45-4.73-.89-1.79Z"></path>
+</svg> Lister les genres</a>
+    <a href="{{ path('ajouter_genre') }}"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M20 2h-2v2h-2v2h2v2h2V6h2V4h-2zm2 10.5c0-.38-.21-.73-.55-.89L12.9 7.33c-.56-.28-1.23-.28-1.79 0l-8.56 4.28c-.34.17-.55.52-.55.89s.21.72.55.89l2.21 1.11-2.21 1.11c-.34.17-.55.52-.55.89s.21.72.55.89l8.55 4.28c.28.14.59.21.89.21s.61-.07.89-.21l8.55-4.28c.34-.17.55-.52.55-.89s-.21-.72-.55-.89l-2.21-1.11 2.21-1.11a1 1 0 0 0 .55-.89ZM12 9.12l6.76 3.38-2.21 1.11L12 15.89l-4.55-2.28-2.21-1.11zm6.76 7.38L12 19.88 5.24 16.5 7 15.62l4.11 2.05c.28.14.59.21.89.21s.61-.07.89-.21L17 15.62z"></path>
+</svg> Ajouter un genre</a>
+  </div>
+</div>
+
+
+</div>
+
+<div class="table-section">
+  <h2>Derniers ajouts</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Auteurs</th>
+        <th>Genres</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for livre in livres %}
+        <tr>
+          <td>{{ livre.titre }}</td>
+
+          <td>
+            {% for auteur in livre.auteurs %}
+              {{ auteur.nomPrenom }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+
+          <td>
+            {% for genre in livre.genres %}
+              <span class="genre-badge">{{ genre.nom }}</span>
+                {% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+
+          <td>
+            <span class="badge badge--green">Disponible</span>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
 

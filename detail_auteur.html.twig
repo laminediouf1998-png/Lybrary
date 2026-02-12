@@ -1,0 +1,65 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Détails de l’auteur
+{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <!-- Header + actions -->
+  <div class="page-header">
+    <h2>{{ auteur.nomPrenom }}</h2>
+
+    <div class="detail-actions">
+      <a class="btn btn-primary" href="{{ path('modifier_auteur', { id: auteur.id }) }}">
+        Modifier
+      </a>
+
+      <a class="btn btn-danger"
+         href="{{ path('supprimer_auteur', { id: auteur.id }) }}"
+         onclick="return confirm('Voulez-vous vraiment supprimer cet auteur ?');">
+        Supprimer
+      </a>
+    </div>
+  </div>
+
+  <!-- Infos auteur -->
+  <div class="author-details">
+    <div class="detail-row">
+      <span class="detail-label">Nom complet</span>
+      <span class="detail-value">{{ auteur.nomPrenom }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Date de naissance</span>
+      <span class="detail-value">
+        {{ auteur.dateDeNaissance|date('d/m/Y') }}
+      </span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Nationalité</span>
+      <span class="detail-value">{{ auteur.nationalite }}</span>
+    </div>
+  </div>
+
+  <!-- Livres écrits -->
+  <h3 class="section-title">Livres écrits</h3>
+
+  {% if livres is empty %}
+    <p class="search-empty">Aucun livre pour cet auteur.</p>
+  {% else %}
+    <ul class="author-books">
+      {% for livre in livres %}
+        <li class="book-item">
+          {{ livre.titre }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+</div>
+
+{% endblock %}

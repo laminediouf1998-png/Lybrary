@@ -1,0 +1,11 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+    # genre
+list_genre_all:
+  path: /list_genre_all
+  controller: App\Controller\LivreController::list_genre_all
+  

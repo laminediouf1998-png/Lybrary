@@ -1,0 +1,37 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Genres et auteurs
+{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h1>Genres et auteurs</h1>
+  </div>
+
+  <div class="group-list">
+    {% for genre in genres %}
+      <div class="group-card">
+        <h3 class="group-title">{{ genre.nom }}</h3>
+
+        {% set auteursAffiches = [] %} {#creer un tableau vide pour evider doublons auteur#}
+        <ul class="pill-list">
+            {% for livre in genre.livres %}
+                {% for auteur in livre.auteurs %}
+                    {% if auteur.id not in auteursAffiches %}
+                        <li class="pill">{{ auteur.nomPrenom }}</li>
+                        {% set auteursAffiches = auteursAffiches|merge([auteur.id]) %} {#|:filtre; merge: ajoute#}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

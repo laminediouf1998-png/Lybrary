@@ -1,0 +1,18 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Total des pages
+{% endblock %}
+
+{% block contenu %}
+<div class="table-section">
+  <div class="page-header">
+    <h1>Total des pages</h1>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-label">Nombre total de pages écrites dans ce genre</div>
+    <div class="stat-value">{{ total }}</div>
+  </div>
+</div>
+{% endblock %}

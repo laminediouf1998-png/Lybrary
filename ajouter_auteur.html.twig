@@ -1,0 +1,47 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}Ajouter un auteur{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h2>Ajouter un auteur</h2>
+  </div>
+
+  {{ form_start(monFormulaire) }}
+
+    <div class="form-group">
+      {{ form_label(monFormulaire.nomPrenom) }}
+      {{ form_widget(monFormulaire.nomPrenom, { attr: { class: 'form-input' } }) }}
+      {{ form_errors(monFormulaire.nomPrenom) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_label(monFormulaire.sexe) }}
+      {{ form_widget(monFormulaire.sexe, { attr: { class: 'form-input' } }) }}
+      {{ form_errors(monFormulaire.sexe) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_label(monFormulaire.dateDeNaissance) }}
+      {{ form_widget(monFormulaire.dateDeNaissance, { attr: { class: 'form-input' } }) }}
+      {{ form_errors(monFormulaire.dateDeNaissance) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_label(monFormulaire.nationalite) }}
+      {{ form_widget(monFormulaire.nationalite, { attr: { class: 'form-input' } }) }}
+      {{ form_errors(monFormulaire.nationalite) }}
+    </div>
+
+    <div class="form-actions">
+      {{ form_widget(monFormulaire.Envoyer, { attr: { class: 'btn btn-primary' } }) }}
+    </div>
+
+  {{ form_end(monFormulaire) }}
+
+</div>
+
+{% endblock %}

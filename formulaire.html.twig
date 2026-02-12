@@ -1,0 +1,62 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Ajouter un livre
+{% endblock %}
+
+{% block contenu %}
+
+<div class="form-card">
+
+    <h2 class="form-title">Ajouter un livre</h2>
+
+    {{ form_start(monFormulaire) }}
+
+        <div class="form-group">
+            {{ form_label(monFormulaire.isbn) }}
+            {{ form_widget(monFormulaire.isbn) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(monFormulaire.titre) }}
+            {{ form_widget(monFormulaire.titre) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(monFormulaire.nbPages) }}
+            {{ form_widget(monFormulaire.nbPages) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(monFormulaire.dateDeParition) }}
+            {{ form_widget(monFormulaire.dateDeParition) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(monFormulaire.note) }}
+            {{ form_widget(monFormulaire.note) }}
+        </div>
+
+        <div class="form-group">
+            <label>Auteurs</label>
+            <div class="checkbox-group">
+                {{ form_widget(monFormulaire.auteurs) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Genres</label>
+            <div class="checkbox-group">
+                {{ form_widget(monFormulaire.genres) }}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            {{ form_widget(monFormulaire.Envoyer) }}
+        </div>
+
+    {{ form_end(monFormulaire) }}
+
+</div>
+
+{% endblock %}

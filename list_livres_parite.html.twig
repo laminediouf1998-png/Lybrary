@@ -1,0 +1,21 @@
+{% extends "admin_base.html.twig" %}
+
+{% block titre %}Parité{% endblock %}
+
+{% block contenu %}
+<div class="table-section">
+  <div class="page-header">
+    <h1>Parité</h1>
+  </div>
+
+  {% if result is empty %}
+    <p class="search-empty">Aucun livre trouvé.</p>
+  {% else %}
+    <ul class="simple-list">
+      {% for livre in result %}
+        <li class="simple-list__item">{{ livre.titre }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

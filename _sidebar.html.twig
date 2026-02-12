@@ -1,0 +1,74 @@
+{% set r = app.request.attributes.get('_route') %}
+
+<aside class="sidebar">
+
+  <div class="sidebar__top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+         viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="sidebar__icon">
+      <path d="M11 22H5.5a1 1 0 0 1 0-5h4.501"/>
+      <path d="m21 22-1.879-1.878"/>
+      <path d="M3 19.5v-15A2.5 2.5 0 0 1 5.5 2H18a1 1 0 0 1 1 1v8"/>
+      <circle cx="17" cy="18" r="3"/>
+    </svg>
+    <span class="title">MaBiblio</span>
+  </div>
+
+  <nav class="sidebar__nav">
+
+    <a href="{{ path('menu') }}"
+       class="sidebar__link {{ r == 'menu' ? 'active' : '' }}">
+      <img src="/images/icons/home.png" alt="" class="sidebar__icon">
+      <span>Tableau de bord</span>
+    </a>
+
+    {# LIVRES : actif pour toutes les pages livres (liste, détails, modifier, supprimer, recherche...) #}
+    <a href="{{ path('lister_livres') }}"
+       class="sidebar__link {{
+         r in [
+           'lister_livres','ajouter_livre','details_livre','modifier_livre','supprimer_livre',
+           'recherche_livre','livre_titre_inverse','lister_livres_date','livreNationaliteDiff',
+           'autantHommeFemme','autantHommesFemmes','Livres2date2notes'
+         ] ? 'active' : ''
+       }}">
+      <img src="/images/icons/books.png" alt="" class="sidebar__icon">
+      <span>Livres</span>
+    </a>
+
+    {# AUTEURS : actif pour liste + détails + modifier + supprimer + requêtes auteurs #}
+    <a href="{{ path('lister_auteurs') }}"
+       class="sidebar__link {{
+         r in [
+           'lister_auteurs','ajouter_auteur','afficher_detail_auteur','modifier_auteur','supprimer_auteur',
+           'auteur_3_livres_au_moins','auteur3livresAuMoins','auteurs_genres'
+         ] ? 'active' : ''
+       }}">
+      <img src="/images/icons/users.png" alt="" class="sidebar__icon">
+      <span>Auteurs</span>
+    </a>
+
+    {# GENRES : actif pour liste + ajouter + modifier + supprimer + requêtes genres #}
+    <a href="{{ path('lister_genres') }}"
+       class="sidebar__link {{
+         r in [
+           'lister_genres','ajouter_genre','modifier_genre','supprimer_genre',
+           'genres_auteurs','genre_total_pages'
+         ] ? 'active' : ''
+       }}">
+      <img src="/images/icons/layers.png" alt="" class="sidebar__icon">
+      <span>Genres</span>
+    </a>
+
+  </nav>
+
+  <div class="sidebar__profile">
+    <div class="avatar">
+      <img src="/images/icons/lamine.jpeg" alt="Photo de profil" class="lamine__icon">
+    </div>
+    <div>
+      <small class="bottom">Bibliothécaire</small>
+    </div>
+  </div>
+
+</aside>

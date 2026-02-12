@@ -1,0 +1,52 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}Liste des auteurs{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h1>Liste des auteurs</h1>
+
+    <a href="{{ path('ajouter_auteur') }}" class="btn btn-primary iconText">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+           stroke-width="1.5" stroke="currentColor" class="add__icon">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+      </svg>
+
+      <span class="addText">Nouveau auteur</span>
+    </a>
+  </div>
+
+  {% if auteurs is empty %}
+    <p class="search-empty">Il n’y a aucun auteur pour le moment.</p>
+  {% else %}
+    <ul class="author-list">
+      {% for auteur in auteurs %}
+        <li class="author-item">
+
+          <div class="author-left">
+            <span class="avatar">
+              {{ auteur.nomPrenom|slice(0,1)|upper }}
+            </span>
+
+            <span class="author-name">
+              {{ auteur.nomPrenom }}
+            </span>
+          </div>
+
+          <a class="details-link"
+             href="{{ path('afficher_detail_auteur', { id: auteur.id }) }}">
+            Détails
+          </a>
+
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+</div>
+
+{% endblock %}

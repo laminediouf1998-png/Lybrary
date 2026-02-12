@@ -1,0 +1,131 @@
+{# {% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Catalogue des livres
+{% endblock %}
+
+{% block contenu %}
+
+<h1>Catalogue des livres</h1>
+
+<div class="books-grid">
+
+  {% for livre in livres %}
+    <div class="book-card">
+
+      <div class="book-genres">
+        {% for genre in livre.genres %}
+          <span class="genre-badge">{{ genre.nom }}</span>
+        {% endfor %}
+      </div>
+
+      <h3 class="book-title">{{ livre.titre }}</h3>
+
+      <p class="book-authors">
+        {% for auteur in livre.auteurs %}
+          {{ auteur.nomPrenom }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+
+      <span class="badge badge--green">Disponible</span>
+
+    </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %} #}
+
+{% extends 'admin_base.html.twig' %}
+
+{% block titre %}
+Catalogue des livres
+{% endblock %}
+
+{% block contenu %}
+
+<div class="page-header">
+  <h1>Catalogue des livres</h1>
+  
+      <a href="{{ path('ajouter_livre') }}" class="btn btn-primary iconText">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="1.5" stroke="currentColor" class="add__icon">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+  </svg>
+
+  <span class="addText">Nouveau livre</span>
+</a>
+
+ 
+</div>
+
+<form action="{{ path('recherche_livre') }}" method="get" class="search-bar">
+
+  <input
+    type="text"
+    name="q"
+    placeholder="Rechercher un titre, un auteur..."
+    class="search-input"
+    value="{{ mot ?? '' }}"
+  >
+
+  <button class="search-btn" type="submit">
+    <img src="/images/icons/search.svg" alt="Rechercher">
+  </button>
+
+</form>
+
+
+{% if livres is empty %}
+  <p>Aucun livre pour le moment.</p>
+{% else %}  
+
+<div class="books-grid">
+
+  {% for livre in livres %}
+    <div class="book-card">
+
+      {# Genres #}
+      <div class="book-genres">
+        {% for genre in livre.genres %}
+          <span class="genre-badge">
+            {{ genre.nom }}
+          </span>
+        {% endfor %}
+      </div>
+
+    
+      <h3 class="book-title">
+        {{ livre.titre }}
+      </h3>
+
+      
+      <p class="book-authors">
+        {% for auteur in livre.auteurs %}
+          {{ auteur.nomPrenom }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+
+  
+      <div class="book-footer">
+        <span class="badge badge--green">
+          Disponible
+        </span>
+
+           <a href="{{path('details_livre',{'id':livre.id})}}" class="details-link"> 
+
+          Détails
+        </a>
+      </div>
+      
+
+    </div>
+  {% endfor %}
+
+</div>
+
+
+{% endif %}
+
+{% endblock %}

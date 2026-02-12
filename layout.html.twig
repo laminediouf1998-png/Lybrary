@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titre %}MaBiblio{% endblock %}</title>
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
+
+<body>
+
+<div class="layout">
+
+  {# SIDEBAR FIXE #}
+  {% include 'partials/sidebar.html.twig' %}
+
+  {# CONTENU PRINCIPAL #}
+  <main class="main">
+    {% if app.request.attributes.get('_route') != 'menu' %}
+      <button class="back-btn" type="button" onclick="window.location.href='{{ path('menu') }}'">
+        Retour
+      </button>
+    {% endif %}
+    {% block contenu %}{% endblock %}
+  </main>
+
+</div>
+
+</body>
+</html>

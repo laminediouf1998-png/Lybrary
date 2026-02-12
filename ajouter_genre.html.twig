@@ -1,0 +1,30 @@
+{% extends "admin_base.html.twig" %}
+
+{% block titre %}Ajouter un genre{% endblock %}
+
+{% block contenu %}
+
+<div class="table-section">
+
+  <div class="page-header">
+    <h2>Ajouter un genre</h2>
+  </div>
+
+ {{ form_start(monFormulaire) }}
+
+<div class="form-group">
+  {{ form_label(monFormulaire.nom, 'Nom du genre') }}
+  {{ form_widget(monFormulaire.nom, { attr: { class: 'form-input' } }) }}
+  {{ form_errors(monFormulaire.nom) }}
+</div>
+
+<div class="form-actions">
+  {{ form_widget(monFormulaire.Envoyer, { attr: { class: 'btn btn-primary' } }) }}
+</div>
+
+{{ form_end(monFormulaire) }}
+
+
+</div>
+
+{% endblock %}
